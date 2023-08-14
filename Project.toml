@@ -2,3 +2,16 @@ name = "PCFGs"
 uuid = "4a5b7470-4c49-42ae-952d-0f7982821011"
 authors = ["Marco Matthies <71844+marcom@users.noreply.github.com>"]
 version = "0.1.0"
+
+[deps]
+OffsetArrays = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
+
+[compat]
+OffsetArrays = "1"
+
+[extras]
+Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Aqua", "Test"]
