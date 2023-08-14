@@ -27,10 +27,14 @@ struct Grammar{Tchar,Tweight}
             newres = Union{Symbol,Int}[]
             for s in res
                 if s isa Symbol
-                    push!(nonterminals, s)
+                    if s ∉ nonterminals
+                        push!(nonterminals, s)
+                    end
                     push!(newres, s)
                 elseif s isa Tchar
-                    push!(alphabet, s)
+                    if s ∉ alphabet
+                        push!(alphabet, s)
+                    end
                     # TODO: just use length(alphabet) ?
                     push!(newres, findfirst(c -> c == s, alphabet))
                 else
