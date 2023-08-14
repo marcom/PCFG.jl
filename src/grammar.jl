@@ -6,7 +6,8 @@ struct Grammar{Tchar,Tweight}
     empty :: Symbol
     nonterminals :: Vector{Symbol}
     alphabet :: Vector{Tchar}
-    prod :: Vector{Tuple{Symbol, Vector{Union{Symbol,Int}}, Tweight}}
+    prod :: Vector{Tuple{Symbol, Vector{Union{Symbol,Int}}}}
+    weights :: Vector{Tweight}
 
     function Grammar{Tchar,Tweight}(
         start::Symbol,
@@ -16,10 +17,12 @@ struct Grammar{Tchar,Tweight}
         if Tchar isa Symbol
             error("Tchar can't be Symbol")
         end
-        # find all nonterminals and the alphabet
+        # collect all nonterminals and the alphabet, convert
+        # productions to internal format
         nonterminals = Symbol[]
         alphabet = Tchar[]
-        newprod = Tuple{Symbol, Vector{Union{Symbol,Int}}, Tweight}[]
+        newprod = Tuple{Symbol, Vector{Union{Symbol,Int}}}[]
+        weights = Tweight[]
         for (nt, res, weight) in prod
             newres = Union{Symbol,Int}[]
             for s in res
@@ -34,9 +37,10 @@ struct Grammar{Tchar,Tweight}
                     error("illegal entry $s of type $(typeof(s)) in production")
                 end
             end
-            push!(newprod, (nt, newres, weight))
+            push!(weights, weight)
+            push!(newprod, (nt, newres))
         end
-        return new{Tchar,Tweight}(start, empty, nonterminals, alphabet, newprod)
+        return new{Tchar,Tweight}(start, empty, nonterminals, alphabet, newprod, weights)
     end
 
     Grammar{Tchar,Tweight}(start, prod) where {Tchar,Tweight} = Grammar{Tchar,Tweight}(start, :ε, prod)

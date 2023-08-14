@@ -11,4 +11,5 @@ using PCFGs: Grammar
 
     g = Grammar([(:S, [:S, :S], 0.4), (:S, ['(', :S, ')'], 0.6)])
     @test g isa Grammar
+    @test g isa Grammar{Char,Float64}
 end
