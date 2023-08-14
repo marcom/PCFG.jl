@@ -1,4 +1,4 @@
-export Grammar, GrammarCNF
+export Grammar
 
 # Context-Free Grammar
 struct Grammar{Tchar,Tweight}

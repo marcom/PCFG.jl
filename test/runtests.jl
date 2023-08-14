@@ -7,4 +7,5 @@ showtestset() = println(" "^(2 * Test.get_testset_depth()), "testing ",
 @testset verbose=true "PCFGs" begin
     showtestset()
     include("grammar.jl")
+    include("aqua.jl")
 end
