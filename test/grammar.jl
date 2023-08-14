@@ -13,6 +13,10 @@ using PCFGs: Grammar
         @test g.start == :S
         @test Set(g.nonterminals) == Set([:S])
         @test Set(g.alphabet) == Set(['(', ')'])
-        @test length(g.weights) == 2
+        @test g.prod == [
+            (:S, [:S, :S]),
+            (:S, [1, :S, 2]),
+        ]
+        @test g.weights == [0.4, 0.6]
     end
 end
