@@ -1,4 +1,4 @@
-name = "PCFG"
+name = "PCFGs"
 uuid = "4a5b7470-4c49-42ae-952d-0f7982821011"
 authors = ["Marco Matthies <71844+marcom@users.noreply.github.com>"]
 version = "0.1.0"
