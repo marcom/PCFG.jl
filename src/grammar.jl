@@ -49,4 +49,17 @@ function Grammar{Tchar,Tweight}(
 end
 
 Grammar{Tchar,Tweight}(start, prod) where {Tchar,Tweight} = Grammar{Tchar,Tweight}(start, :ε, prod)
+
 Grammar(prod) = Grammar{Char, Float64}(:S, :ε, prod)
+
+function Base.show(io::IO, mime::MIME"text/plain", g::Grammar)
+    println(io, "Start symbol: $(g.start)")
+    println(io, "Empty symbol: $(g.empty)")
+    println(io, "Nonterminals: $(g.nonterminals)")
+    println(io, "Alphabet    : $(g.alphabet)")
+    println(io, "Productions")
+    for (i, (nt, rhs)) in enumerate(g.prod)
+        rhs_str = join(map(x -> x isa Int ? g.alphabet[x] : ":" * String(x), rhs), " ")
+        println(io, "    :$nt -> $rhs_str    [$(g.weights[i])]")
+    end
+end
